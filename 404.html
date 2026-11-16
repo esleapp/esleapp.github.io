@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="theme-color" content="#e11d48" />
     <title>Eşle</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Eşle" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <link rel="icon" href="/favicon.ico" />
     <style id="expo-reset">
       html, body { height: 100%; }
@@ -19,6 +25,7 @@
   <body class="notranslate">
     <noscript>Eşle'yi kullanmak için JavaScript gerekli.</noscript>
     <div id="root"></div>
-  <script src="/_expo/static/js/web/index-54ba3ee2ca974f294f6dab0886392101.js" defer></script>
+    <script>if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });</script>
+  <script src="/_expo/static/js/web/index-35d9117d4602c29bddf248fa93f037f5.js" defer></script>
 </body>
 </html>
