@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Eşle ekran ölçümü</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111827; color: #f9fafb; font: 15px/1.45 -apple-system, "Segoe UI", sans-serif; }
+  main { padding: 16px; padding-top: max(16px, env(safe-area-inset-top)); }
+  h1 { font-size: 18px; margin: 0 0 8px; }
+  table { border-collapse: collapse; width: 100%; }
+  td { border-bottom: 1px solid #374151; padding: 6px 4px; }
+  td:last-child { text-align: right; font-weight: 700; color: #fbbf24; }
+  .cizgi { position: fixed; left: 0; right: 0; bottom: 0; height: 6px; background: #e11d48; }
+  .cizgi2 { position: fixed; left: 0; right: 0; bottom: env(safe-area-inset-bottom); height: 6px; background: #22c55e; }
+  #olc-dvh { position: absolute; top: 0; height: 100dvh; width: 1px; }
+  #olc-svh { position: absolute; top: 0; height: 100svh; width: 1px; }
+  #olc-lvh { position: absolute; top: 0; height: 100lvh; width: 1px; }
+  #olc-sab { position: absolute; top: 0; height: env(safe-area-inset-bottom); width: 1px; }
+  #olc-sat { position: absolute; top: 0; height: env(safe-area-inset-top); width: 1px; }
+  p.not { color: #9ca3af; font-size: 13px; }
+</style>
+</head>
+<body>
+<div id="olc-dvh"></div><div id="olc-svh"></div><div id="olc-lvh"></div><div id="olc-sab"></div><div id="olc-sat"></div>
+<main>
+  <h1>Eşle ekran ölçümü</h1>
+  <p class="not">Bu sayfa yalnızca ekran ölçülerini gösterir; hiçbir bilgi kaydedilmez veya gönderilmez. Ekran görüntüsünü alıp gönder.</p>
+  <table id="t"></table>
+  <p class="not">Altta kırmızı ve yeşil iki ince çizgi olmalı. Hangisi Safari çubuğunun altında kalıyor, hangisi görünüyor?</p>
+</main>
+<div class="cizgi"></div><div class="cizgi2"></div>
+<script>
+  function h(id) { return Math.round(document.getElementById(id).getBoundingClientRect().height); }
+  function yaz() {
+    var vv = window.visualViewport;
+    var satirlar = [
+      ['Tarayıcı', navigator.userAgent.replace(/^Mozilla\/5\.0 /, '').slice(0, 90)],
+      ['innerHeight', window.innerHeight],
+      ['visualViewport', vv ? Math.round(vv.height) : '-'],
+      ['html yüksekliği', document.documentElement.clientHeight],
+      ['100dvh', h('olc-dvh')], ['100svh', h('olc-svh')], ['100lvh', h('olc-lvh')],
+      ['alt güvenli alan', h('olc-sab')], ['üst güvenli alan', h('olc-sat')],
+      ['ekran', screen.width + ' × ' + screen.height],
+      ['genişlik', window.innerWidth],
+      ['ana ekran uygulaması', (navigator.standalone || matchMedia('(display-mode: standalone)').matches) ? 'evet' : 'hayır'],
+    ];
+    document.getElementById('t').innerHTML = satirlar.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>'; }).join('');
+  }
+  yaz();
+  window.addEventListener('resize', yaz);
+  if (window.visualViewport) visualViewport.addEventListener('resize', yaz);
+</script>
+</body>
+</html>
